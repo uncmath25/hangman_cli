@@ -1,14 +1,28 @@
+SECRET_WORD = 'CAT'
+GUESSES_LEFT_KEY = 'GUESSES_LEFT'
+
 def run_game():
     print('Lets play Hangman')
-    guesses_left = 3
-    while guesses_left > 0:
-        print('Enter your next guess:')
-        next_guess = input()
-        show_screen()
-        guesses_left = guesses_left - 1
-    print('GAME OVER!!!')
+    state = init()
+    while not is_game_over(state):
+        state = update(state)
+        render(state)
 
-def show_screen():
+def is_game_over(state):
+    return state[GUESSES_LEFT_KEY] == 0
+
+def init():
+    state = {}
+    state[GUESSES_LEFT_KEY] = 3
+    return state
+
+def update(state):
+    print('Enter your next guess:')
+    next_guess = input()
+    state[GUESSES_LEFT_KEY] -= 1
+    return state
+
+def render(state):
     print('WORD: ?')
     show_hangman()
 
