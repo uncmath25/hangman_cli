@@ -1,11 +1,13 @@
+WORD_KEY = 'WORD'
 GUESSES_LEFT_KEY = 'GUESSES_LEFT'
 GUESSES_KEY = 'GUESSES'
 IS_GAME_STARTED_KEY = 'IS_GAME_STARTED'
 HAS_ASKED_GAME_TO_START_KEY = 'HAS_ASKED_GAME_TO_START'
 
-def init(init_guesses):
+def init(word, guesses):
     state = {}
-    state[GUESSES_LEFT_KEY] = init_guesses
+    state[WORD_KEY] = word
+    state[GUESSES_LEFT_KEY] = guesses
     state[GUESSES_KEY] = []
     state[IS_GAME_STARTED_KEY] = False
     state[HAS_ASKED_GAME_TO_START_KEY] = False
