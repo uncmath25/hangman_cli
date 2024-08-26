@@ -2,16 +2,20 @@ import os
 
 from state import *
 
-def render(state):
+def render_init():
     clear_screen()
-    if not is_game_started(state):
-        print('Lets play Hangman...\n')
-    if is_game_over(state):
-        print('GAME OVER')
-        print('\n\n\n\n\n')
-        return
+    print('Lets play Hangman...\n')
+    print('(Hit enter to continue)\n')
+
+def render_update(state):
+    clear_screen()
     show_hangman()
     print('Enter your next guess:')
+
+def render_game_over():
+    clear_screen()
+    print('GAME OVER')
+    print('\n\n\n\n\n')
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')

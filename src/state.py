@@ -2,7 +2,6 @@ WORD_KEY = 'WORD'
 GUESSES_LEFT_KEY = 'GUESSES_LEFT'
 GUESSES_KEY = 'GUESSES'
 IS_GAME_STARTED_KEY = 'IS_GAME_STARTED'
-HAS_ASKED_GAME_TO_START_KEY = 'HAS_ASKED_GAME_TO_START'
 
 def init(word, guesses):
     state = {}
@@ -10,7 +9,6 @@ def init(word, guesses):
     state[GUESSES_LEFT_KEY] = guesses
     state[GUESSES_KEY] = []
     state[IS_GAME_STARTED_KEY] = False
-    state[HAS_ASKED_GAME_TO_START_KEY] = False
     return state
 
 def is_game_started(state):
@@ -18,12 +16,6 @@ def is_game_started(state):
 
 def set_game_started(state):
     state[IS_GAME_STARTED_KEY] = True
-
-def has_asked_game_to_start(state):
-    return state[HAS_ASKED_GAME_TO_START_KEY]
-
-def ask_game_to_start(state):
-    state[HAS_ASKED_GAME_TO_START_KEY] = True
 
 def is_game_over(state):
     return state[GUESSES_LEFT_KEY] == 0
