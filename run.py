@@ -1,30 +1,41 @@
+import os
+
+from state import *
+
 SECRET_WORD = 'CAT'
-GUESSES_LEFT_KEY = 'GUESSES_LEFT'
+INITIAL_GUESSES = 3
 
 def run_game():
-    print('Lets play Hangman')
-    state = init()
+    state = init(INITIAL_GUESSES)
     while not is_game_over(state):
         state = update(state)
         render(state)
 
-def is_game_over(state):
-    return state[GUESSES_LEFT_KEY] == 0
-
-def init():
-    state = {}
-    state[GUESSES_LEFT_KEY] = 3
-    return state
-
 def update(state):
-    print('Enter your next guess:')
+    if not is_game_started(state):
+        if not has_asked_game_to_start(state):
+            ask_game_to_start(state)
+            return state
+        else:
+            set_game_started(state)
     next_guess = input()
-    state[GUESSES_LEFT_KEY] -= 1
+    add_guess(state, next_guess)
+    remove_guess_left(state)
     return state
 
 def render(state):
-    print('WORD: ?')
+    clear_screen()
+    if not is_game_started(state):
+        print('Lets play Hangman...\n')
+    if is_game_over(state):
+        print('GAME OVER')
+        print('\n\n\n\n\n')
+        return
     show_hangman()
+    print('Enter your next guess:')
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 def show_hangman():
     print('  ______ ')
